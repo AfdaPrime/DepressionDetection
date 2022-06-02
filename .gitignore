@@ -127,3 +127,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+tweet_senti.csv
