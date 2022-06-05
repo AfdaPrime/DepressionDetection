@@ -9,13 +9,35 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 
 # %%
-df = pd.read_csv(
-    'https://raw.githubusercontent.com/laxmimerit/twitter-suicidal-intention-dataset/master/twitter-suicidal_data.csv', encoding='latin-1')
-df.head()
+
+assert len(tf.config.list_physical_devices('GPU')) > 0
 
 # %%
+initial = pd.read_csv(
+    'D:/newCode/Machine Learning/DepressionDetection/tweet_senti.csv', encoding='latin-1')
+# df.head()
+
+# %%
+
+data = {
+
+    "intention": initial.iloc[:, 0],
+    "tweet": initial.iloc[:, 5]
+
+}
+
+df = pd.DataFrame(data)
+
+
+for i, row in df.iterrows():
+
+    if (df.at[i, 'intention'] != 0):
+        df.at[i, 'intention'] = 1
+
+
 df['intention'].value_counts()
 
 # %%
@@ -43,6 +65,8 @@ df.head()
 x_train, x_test, y_train, y_test = train_test_split(
     df['tweet'].values, df['intention'].values, test_size=0.30)
 
+
+
 # %%
 print("twitt:", x_train[0])
 print("sentiment:", y_train[0])
@@ -62,13 +86,14 @@ print('The size of the database vocab is: ', V)
 # converting tran and test sentences into sequences
 train_seq = tokenizer.texts_to_sequences(x_train)
 test_seq = tokenizer.texts_to_sequences(x_test)
+
 print('Training sequence: ', train_seq[0])
 print('Testing sequence: ', test_seq[0])
 
 # %%
 # padding the sequences to get equal length sequence because its conventional to use same size sequences
 # padding the traing sequence
-pad_train = pad_sequences(train_seq)
+pad_train = pad_sequences(train_seq,maxlen=200)
 T = pad_train.shape[1]
 print('The length of training sequence is: ', T)
 
@@ -96,21 +121,22 @@ model = Model(i, x)
 # %%
 model.compile(optimizer='adam', loss='BinaryCrossentropy',
               metrics=['accuracy'])
+# model.summary()
 # %%
-r = model.fit(pad_train, y_train, validation_data=(pad_test, y_test), epochs=50)
+r = model.fit(pad_train, y_train, validation_data=(pad_test, y_test), epochs=1)
 # Evaluating the model
 # plotting the loss and validation loss of the model
 plt.plot(r.history['loss'], label='loss')
 plt.plot(r.history['val_loss'], label='val_loss')
 plt.legend()
 
-#%%
+# %%
 # plotting the accuracy and validation accuracy of the model
 plt.plot(r.history['accuracy'], label='accuracy')
 plt.plot(r.history['val_accuracy'], label='val_accuracy')
 plt.legend()
 
-#%%
+# %%
 # Predicting the sentiment of any text
 
 
@@ -130,10 +156,18 @@ def predict_sentiment(text):
         return(print('It is a negative sentiment'))
 
 
+# %%
 text = ['hahahahahaha funny cute']
 predict_sentiment(text)
-
+# %%%%
+x = ['no one cares about me. i will die alone']
+predict_sentiment(x) 
+# %%
 # saving the model for future purpose
-# model.save('sentiment analysis.h5')   # creates HDF5 file for model
+path = './model.h5'
+model.save(path )
 
+# %%
+with open('tokenizer.pkl', 'wb') as f:
+    pickle.dump(tokenizer, f)
 # %%

@@ -1,19 +1,16 @@
 # %%
-from ast import If
+
 from sklearn.metrics import classification_report
 from sklearn.svm import LinearSVC
 from sklearn.feature_extraction.text import TfidfVectorizer
-from keras.models import Model
-from keras.layers import Input, Dense, Embedding, LSTM, GlobalMaxPooling1D
-from keras.preprocessing.sequence import pad_sequences
+
 from keras.preprocessing.text import Tokenizer
 
 from sklearn.model_selection import train_test_split
 import re
-import tensorflow as tf
+
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+
 import pickle
 
 # %%
@@ -91,7 +88,7 @@ print(classification_report(y_test, y_pred))
 
 pkl_filename = "twitter_NLP_svm.pkl"
 with open(pkl_filename, 'wb') as file:
-    pickle.dump(clf,file)
+    pickle.dump(clf, file)
 
 # %%
 x = 'no one cares about me. i will die alone'
