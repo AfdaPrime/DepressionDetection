@@ -57,11 +57,15 @@ def view():
         prev()
     conn.commit()
 
+# to view next set of data
+
 
 def next():
     global x
     x += 11
     view()
+
+# do view the previous set of data
 
 
 def prev():
