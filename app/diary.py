@@ -2,26 +2,22 @@
 import os
 import sqlite3 as sql
 from datetime import datetime
-from tkinter import NONE
-import text_cleaning as tc
 import model
 import numpy as np
-
+import text_cleaning as tc
 # %%
 
 # database connection
-path = os.path.join('../db', 'diary.db')
+path = os.path.join('./db', 'diary.db')
 conn = sql.connect(path)
 
 c = conn.cursor()
 
 # %%    INSERT DATA INTO DATABASE
-
-
 # insert the data into the database
 
-
 def insert(text):
+    
     # current time the diary insert
     now = datetime.now()
     current_time = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -37,25 +33,22 @@ def insert(text):
     conn.commit()
 # %%    VEIW DATA
 
-
 x = 0
-
 
 def view():
 
     global x
 
-    # select content from x to x+10
-    c.execute("SELECT id FROM diary WHERE id BETWEEN ? AND ?", (x, x+10))
+    c.execute("SELECT * FROM diary ORDER BY id DESC")
 
     result = c.fetchall()
 
     if(result != []):
-        print(result)
+        conn.commit()
+        return result
     else:
         print("at the end")
         prev()
-    conn.commit()
 
 # to view next set of data
 

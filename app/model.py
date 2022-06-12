@@ -5,10 +5,10 @@ import tensorflow as tf
 import pickle
 
 # %%
-path = os.path.join('../NLP_Stuff', 'model.h5')
+path = os.path.join('./NLP_Stuff', 'model.h5')
 model = tf.keras.models.load_model(path)
 
-path = os.path.join('../NLP_Stuff', 'tokenizer.pkl')
+path = os.path.join('./NLP_Stuff', 'tokenizer.pkl')
 with open(path, 'rb') as f:
     tokenizer = pickle.load(f)
 # %%

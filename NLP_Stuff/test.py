@@ -11,9 +11,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 
-# %%
-
-assert len(tf.config.list_physical_devices('GPU')) > 0
 
 # %%
 initial = pd.read_csv(

@@ -1,10 +1,29 @@
-import tkinter as tk
+import sys
+from tkinter import *
+from tkinter import ttk
+sys.path.insert(0, './app')
+import section
+import topbar
 
-root = tk.Tk()
+def main():
 
-canvas = tk.Canvas(root,width=1600,height=1600)
-canvas.grid(columns=3)
+    window = Tk()
+    width= window.winfo_screenwidth()               
+    height= window.winfo_screenheight()               
+    window.geometry("%dx%d" % (width, height))
 
+    window.state('zoomed')
 
+    #%%
+    # Create a top bar
 
-root.mainloop()
+    topbar.topbar(window)
+
+    #%%
+    # Function for diary section
+
+    section.section(window,width=width)
+
+    #%%
+
+    window.mainloop()
