@@ -5,12 +5,16 @@ import tkinter as tk
 sys.path.insert(0, './app')
 
 import diary as dy
+import section
 
 class add_diary(Frame):
 
-	def __init__(self):
+	def __init__(self,window):
 		self.winadddiary = Tk()
 		self.winadddiary .configure(bg='light green')
+
+		self.window = window
+	
 
 		# app title
 		self.winadddiary .title("DEPRESSION DIARY")
@@ -40,6 +44,6 @@ class add_diary(Frame):
 	def submit(self,text_input):
 
 		dy.insert(text_input)
-
+		section.section(self.window,width= self.window.winfo_screenwidth())
 		#tukar code add text to diary
 		self.winadddiary .destroy()	

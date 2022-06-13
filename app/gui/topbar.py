@@ -7,10 +7,10 @@ def topbar(window):
     topbar = Frame(window)
 
     Label(topbar,text="TopBar").grid(row=0,column=0)
-    Button(topbar,text="Add Diary",command=add_diary).grid(row=0,column=1)
+    Button(topbar,text="Add Diary",command=lambda : add_diary(window)).grid(row=0,column=1)
     Button(topbar,text="log Out").grid(row=0,column=2)
 
     topbar.pack(anchor=W)
 
-def add_diary():
-    ad.add_diary()
+def add_diary(window):
+    ad.add_diary(window)

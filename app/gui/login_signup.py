@@ -43,7 +43,7 @@ def login():
                     "Success", "Successfully Login", parent=win)
                 close()
                 main.main()
-                main()
+        
             con.close()
         except Exception as es:
             messagebox.showerror(

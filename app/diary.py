@@ -26,6 +26,7 @@ def insert(text):
     x = tc.text_cleaning(text)
 
     level = model.predict_sentiment([x])
+    model.predict_image()
 
     c.execute(
         "INSERT INTO diary (content,time,depression_level) VALUES (?,?,?)", (text, current_time, np.float32(level[0][0]).item()))

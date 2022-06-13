@@ -127,4 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
 tweet_senti.csv
+emotions/test/
+emotions/training/
+emotions(ML).zip

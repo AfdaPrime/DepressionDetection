@@ -5,9 +5,16 @@ from tkinter import ttk
 sys.path.insert(0, './app')
 
 import diary as dy
-
+import topbar
 #%%
 def section(window,**kwargs):
+
+    game = window.winfo_children()
+
+    if(len(game) != 1):
+        
+        game[1].destroy()
+        print(game)  
 
             # Diary Page
     # Create a main frame
@@ -36,8 +43,10 @@ def section(window,**kwargs):
     # add new frame to the canvas
 
     canvas.create_window((0,0), window=second_frame,anchor="nw",width=kwargs["width"]-20)
+    
+   
 
-
+    
 # Function for diary section
     for i in dy.view():
 
@@ -53,4 +62,3 @@ def section(window,**kwargs):
         # diary solution
         Label(frame,text="Solution",font=25).pack(anchor=W,padx=5,pady=5)
         frame.pack(anchor=W, fill=BOTH, expand=False, side=TOP,padx=10,pady=10,)
-
