@@ -12,7 +12,7 @@
 |  Amirul Aiman bin Mohsin  |      U2000595     |
 
 
-
+---
 
 
 # Structure and Clarity Report
@@ -41,7 +41,7 @@ There are various forms of depression, each with its own set of symptoms, causes
 ## 7.0	Suggestion for future works
 
 
-
+---
 
 
 # Technical Content Report
