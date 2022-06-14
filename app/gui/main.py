@@ -5,7 +5,7 @@ sys.path.insert(0, './app')
 import section
 import topbar
 
-def main():
+def main(user_id):
 
     window = Tk()
     width= window.winfo_screenwidth()               
@@ -17,13 +17,16 @@ def main():
     #%%
     # Create a top bar
 
-    topbar.topbar(window)
+    topbar.topbar(window,user_id)
 
     #%%
     # Function for diary section
 
-    section.section(window,width=width)
+    section.section(window,width=width,user_id=user_id)
 
     #%%
 
     window.mainloop()
+
+if __name__ == '__main__':
+    main(1)

@@ -120,14 +120,16 @@ model.compile(optimizer='adam', loss='BinaryCrossentropy',
               metrics=['accuracy'])
 # model.summary()
 # %%
-r = model.fit(pad_train, y_train, validation_data=(pad_test, y_test), epochs=1)
+r = model.fit(pad_train, y_train, validation_data=(pad_test, y_test), epochs=2)
+
+tf.keras.utils.plot_model(model = r ,to_file='model.png')
+#%%
 # Evaluating the model
 # plotting the loss and validation loss of the model
 plt.plot(r.history['loss'], label='loss')
 plt.plot(r.history['val_loss'], label='val_loss')
 plt.legend()
-
-# %%
+#%%
 # plotting the accuracy and validation accuracy of the model
 plt.plot(r.history['accuracy'], label='accuracy')
 plt.plot(r.history['val_accuracy'], label='val_accuracy')
@@ -161,8 +163,8 @@ x = ['no one cares about me. i will die alone']
 predict_sentiment(x) 
 # %%
 # saving the model for future purpose
-path = './model.h5'
-model.save(path )
+# path = './model.h5'
+# model.save(path )
 
 # %%
 with open('tokenizer.pkl', 'wb') as f:

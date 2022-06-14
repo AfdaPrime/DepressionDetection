@@ -7,15 +7,16 @@ sys.path.insert(0, './app')
 import diary as dy
 import section
 
+
 class add_diary(Frame):
 
-	def __init__(self,window):
+	def __init__(self,window,user_id):
 		self.winadddiary = Tk()
 		self.winadddiary .configure(bg='light green')
 
 		self.window = window
 	
-
+		self.user_id = user_id
 		# app title
 		self.winadddiary .title("DEPRESSION DIARY")
 
@@ -25,7 +26,7 @@ class add_diary(Frame):
 		self.add()
 
 	def add(self):
-
+		
 		#heading label
 		heading = Label(self.winadddiary  , text = "A D D   D I A R Y" , font = 'Verdana 25 bold', background="#30D5C8")
 		heading.place(x=50 , y=50)
@@ -38,12 +39,13 @@ class add_diary(Frame):
 
 		btn_submit = Button(self.winadddiary , text = "Submit" ,fg='white', bg='#994422', border=0, font='Verdana 10 bold',command =lambda: self.submit(t.get('1.0',END)))
 		btn_submit.place(x=390, y=340)
-
-		self.winadddiary .mainloop()
+		
+		self.winadddiary.mainloop()
 
 	def submit(self,text_input):
 
-		dy.insert(text_input)
-		section.section(self.window,width= self.window.winfo_screenwidth())
+	
+		dy.insert(text_input,user_id=self.user_id)
+		section.section(self.window,width= self.window.winfo_screenwidth(),user_id=self.user_id)
 		#tukar code add text to diary
 		self.winadddiary .destroy()	

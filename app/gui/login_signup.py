@@ -2,11 +2,9 @@
 import os
 import sqlite3 as sql
 from tkinter import *
-import tkinter as tk
-from tkinter import ttk, messagebox
-
-from colorama import Fore
+from tkinter import  messagebox
 import main
+
 
 # Login Function
 def clear():
@@ -18,7 +16,11 @@ def close():
     win.destroy()
 
 
+
 def login():
+
+    global user_id
+
     if user_name.get() == "" or password.get() == "":
         messagebox.showerror(
             "Error", "Enter User Name And Password", parent=win)
@@ -38,11 +40,12 @@ def login():
                     "Error", "Invalid User Name And Password", parent=win)
 
             else:
-
-                messagebox.showinfo(
-                    "Success", "Successfully Login", parent=win)
+                
+                cur.execute("select id from user where username= ? and password = ?",
+                        (user_name.get(), password.get()))
+                row = cur.fetchone()
                 close()
-                main.main()
+                main.main(row[0])
         
             con.close()
         except Exception as es:
@@ -85,8 +88,6 @@ def signup():
                                 ))
                     con.commit()
                     con.close()
-                    messagebox.showinfo(
-                        "Success", "Registration Successful", parent=winsignup)
                     clear()
                     switch()
 
@@ -167,54 +168,63 @@ def signup():
 
     winsignup.mainloop()
 
+def main_login():
 
-# Login Window
-win = Tk()
+    global user_name
+    global password
+    global win
+    global userentry
+    global passentry
+    # Login Window
+    win = Tk()
 
-# app title
-win.title("Depression Diary")
+    # app title
+    win.title("Depression Diary")
 
-# window size
-win.maxsize(width=500,  height=400)
-win.minsize(width=500,  height=400)
-
-
-# heading label
-heading = Label(win, text="Login", font='Verdana 25 bold')
-heading.place(x=80, y=100)
-
-username = Label(win, text="User Name :", font='Verdana 10 bold')
-username.place(x=80, y=170)
-
-userpass = Label(win, text="Password :", font='Verdana 10 bold')
-userpass.place(x=80, y=210)
-
-# Entry Box
-user_name = StringVar()
-password = StringVar()
-
-userentry = Entry(win, width=40, textvariable=user_name)
-userentry.focus()
-userentry.place(x=200, y=173)
-
-passentry = Entry(win, width=40, show="*", textvariable=password)
-passentry.place(x=200, y=210)
+    # window size
+    win.maxsize(width=500,  height=400)
+    win.minsize(width=500,  height=400)
 
 
-# button login and clear
+    # heading label
+    heading = Label(win, text="Login", font='Verdana 25 bold')
+    heading.place(x=80, y=100)
 
-btn_login = Button(win, text="Login", font='Verdana 10 bold', command=login)
-btn_login.place(x=200, y=293)
+    username = Label(win, text="User Name :", font='Verdana 10 bold')
+    username.place(x=80, y=170)
+
+    userpass = Label(win, text="Password :", font='Verdana 10 bold')
+    userpass.place(x=80, y=210)
+
+    # Entry Box
+    user_name = StringVar()
+    password = StringVar()
+
+    userentry = Entry(win, width=40, textvariable=user_name)
+    userentry.focus()
+    userentry.place(x=200, y=173)
+
+    passentry = Entry(win, width=40, show="*", textvariable=password)
+    passentry.place(x=200, y=210)
 
 
-btn_login = Button(win, text="Clear", font='Verdana 10 bold', command=clear)
-btn_login.place(x=260, y=293)
+    # button login and clear
 
-# signup button
-
-sign_up_btn = Button(win, text="Register",
-                     font='Verdana 10 bold', command=signup)
-sign_up_btn.place(x=389, y=293)
+    btn_login = Button(win, text="Login", font='Verdana 10 bold', command=login)
+    btn_login.place(x=200, y=293)
 
 
-win.mainloop()
+    btn_login = Button(win, text="Clear", font='Verdana 10 bold', command=clear)
+    btn_login.place(x=260, y=293)
+
+    # signup button
+
+    sign_up_btn = Button(win, text="Register",
+                        font='Verdana 10 bold', command=signup)
+    sign_up_btn.place(x=389, y=293)
+
+
+    win.mainloop()
+
+if __name__ == '__main__':
+    main_login()
