@@ -1,4 +1,3 @@
-
 import sys
 from tkinter import *
 import login_signup as s

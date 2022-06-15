@@ -64,7 +64,7 @@ def section(window,**kwargs):
         Label(second_frame,text="Diary #" + str(i[0])+" - "+str(i[2]),font=25,padx=5,pady=5,bg='#AED9E0').pack(fill=BOTH,anchor=W,padx=10,pady=(10,0))
 
         # level of depression
-        placeholder = Frame(frame)
+        placeholder = Frame(frame,bg='#D1FEB8')
         Label(placeholder,text="Level of Depression : "+str(int(i[3]*100))+"%",font=25,bg='#D1FEB8').pack(side='left')
         
         if(int(i[3]*100) > 50):

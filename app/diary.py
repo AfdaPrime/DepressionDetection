@@ -8,15 +8,11 @@ import text_cleaning as tc
 
 # %%
 
-
-
 # database connection
 path = os.path.join('./db', 'diary.db')
 conn = sql.connect(path)
 
 c = conn.cursor()
-
-
 
 # %%    INSERT DATA INTO DATABASE
 # insert the data into the database
