@@ -11,6 +11,7 @@
 |   Tessa Shalini Pradeep   |      U2102825     |
 |  Amirul Aiman bin Mohsin  |      U2000595     |
 
+You may open "app" folder to run overall application
 
 ---
 
